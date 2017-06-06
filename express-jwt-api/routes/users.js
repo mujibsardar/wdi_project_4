@@ -5,6 +5,8 @@ const
   User = require('../models/User.js'),
   serverAuth = require('../config/serverAuth.js')
 
+
+////////////////////////////////////////////////
 usersRouter.post('/login', (req, res) => {
   // when a user attempts to log in, try and find the user by the provided email:
   User.findOne({email: req.body.email}, '+password',(err, user) => {
@@ -25,6 +27,8 @@ usersRouter.post('/login', (req, res) => {
     }
   })
 })
+///////////////////////////////////////////////////////
+
 
 usersRouter.route('/')
   .get(usersCtrl.index)
