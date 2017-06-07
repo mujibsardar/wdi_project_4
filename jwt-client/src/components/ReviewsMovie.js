@@ -8,14 +8,19 @@ class ReviewsMovie extends Component {
   constructor(){
     super()
     this.state = {
-      canLeaveReview: true
+      canLeaveReview: null
     }
   }
 
-
   ///////////// 11111111 ///////////////////////
   componentDidMount() {
+  }
+  ///////////// 11111111 ///////////////////////
 
+
+  ///////////// 11111111 ///////////////////////
+  _reviewEligibility(){
+    return null
   }
   ///////////// 11111111 ///////////////////////
 
@@ -35,6 +40,13 @@ class ReviewsMovie extends Component {
   ///////////// 11111111 ///////////////////////
 
 
+  ///////////// 11111111 ///////////////////////
+  _closeDetails(evt){
+    evt.preventDefault()
+    this.props.onClose()
+  }
+  ///////////// 11111111 ///////////////////////
+
 
   ///////////// 11111111 ///////////////////////
   render() {
@@ -42,17 +54,21 @@ class ReviewsMovie extends Component {
     var title = movie.title
     var overview = movie.overview
     var reviews = this.props.movie.reviews
+    var showLeaveReviewBox = this.props.showLeaveReviewBox
 
     return (
       <div className="movieDetails">
-        <h2>{title}</h2>
-        <h5>{overview}</h5>
-
+        <button className="closeDetails" onClick={this._closeDetails.bind(this)}>X</button>
+        <div className="movieInfo">
+          <h2>{title}</h2>
+          <h5>{overview}</h5>
+        </div>
         <Reviews reviews={reviews} />
+        {showLeaveReviewBox && <LeaveReview onLeaveReview={this._leaveReview.bind(this)} movie={movie} />}
 
-        {{
+        {/* {{
           true: <LeaveReview onLeaveReview={this._leaveReview.bind(this)} movie={movie} />,
-        }[this.state.canLeaveReview]}
+        }[this.state.canLeaveReview]} */}
 
       </div>
     )

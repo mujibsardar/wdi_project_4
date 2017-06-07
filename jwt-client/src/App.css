@@ -52,7 +52,11 @@ a:hover {
 .reviews {
   font-size:  11px;
   float: left;
-  margin-left: 10px;
+  margin-right: 80px;
+}
+
+.closeDetails {
+  float: right;
 }
 
 .movieDetails {

@@ -19,33 +19,32 @@ class App extends Component {
       movies: [],
       tvSeries: [],
       currentMovie: null,
-      currentTV: null
+      currentTV: null,
+      showLeaveReviewBox: true
     }
   }
 
 ////////////////// 111111111///////////////////////
   componentDidMount() {
     const currentUser = clientAuth.getCurrentUser()
-
-
     axios ({
         url: '/api/movies',
         method: 'get'
     }).then(response => {
-      axios ({
+        axios ({
           url: '/api/tvs',
           method: 'get'
       }).then(res => {
-        var tvDiscovery = res.data.results
-        var discoverMovies = response.data.results
+            var tvDiscovery = res.data.results
+            var discoverMovies = response.data.results
 
-        this.setState ({
-          movies: discoverMovies,
-          tvSeries: tvDiscovery,
-          currentUser: currentUser,
-          loggedIn: !!currentUser,
-          view: ''
-        })
+            this.setState ({
+              movies: discoverMovies,
+              tvSeries: tvDiscovery,
+              currentUser: currentUser,
+              loggedIn: !!currentUser,
+              view: ''
+            })
       })
     })
   }
@@ -143,6 +142,16 @@ class App extends Component {
 
 
   ////////////////// 111111111///////////////////////
+  _closeDetails(evt){
+    this.setState ({
+      currentMovie: null,
+      currentTV: null
+    })
+  }
+  ////////////////// 111111111///////////////////////
+
+
+  ////////////////// 111111111///////////////////////
   render() {
     return (
       <div className="container">
@@ -168,7 +177,7 @@ class App extends Component {
           signup: <SignUp onSignup={this._signUp.bind(this)} />,
         }[this.state.view]}
         <Movies movies={this.state.movies} showDetailsMovie={this._showDetailsMovie.bind(this)}/>
-        {this.state.currentMovie && <ReviewsMovie movie={this.state.currentMovie}/>}
+        {this.state.currentMovie && <ReviewsMovie movie={this.state.currentMovie} showLeaveReviewBox={this.state.showLeaveReviewBox} onClose={this._closeDetails.bind(this)}/>}
         <TVSeries tvSeries={this.state.tvSeries} showDetailsTV={this._showDetailsTV.bind(this)}/>
         {this.state.currentTV && <ReviewsTV tvSeries={this.state.currentTV}/>}
 
