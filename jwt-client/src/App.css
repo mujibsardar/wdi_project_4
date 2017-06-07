@@ -44,13 +44,22 @@ a:hover {
   text-decoration: underline;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
 .reviews {
   font-size:  11px;
+  float: left;
+  margin-left: 10px;
 }
 
 .movieDetails {
   overflow: hidden;
   height: 350.625px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .contain {
   width: 100%;
