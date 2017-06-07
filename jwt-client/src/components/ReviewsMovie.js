@@ -23,7 +23,8 @@ class ReviewsMovie extends Component {
   _leaveReview(review) {
     axios ({
         url: '/api/movieReviews/',
-        method: 'post'
+        method: 'post',
+        data: review
     }).then(response => {
       console.log("Success! Added Review!");
       console.log(response);

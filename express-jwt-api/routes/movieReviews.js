@@ -1,13 +1,20 @@
 const
-express = require('express'),
-// authorize = require('../config/serverAuth.js').authorize,
-reviewsRouter = new express.Router()
+  express = require('express'),
+  reviewsRouter = new express.Router(),
+  Review = require('../models/MovieReview.js')
 
 reviewsRouter.route('/')
-  .get((req, response) => {
-
+  .get((req, res) => {
+    Review.find({}, (err, reviews) => {
+      if(err) console.log(err);
+      res.json(reviews)
+    })
   })
   .post((req, res) => {
-    console.log("Movie reviews router hit");
-    res.json("Success")
+    Review.create(req.body, (err, review) => {
+      if(err) console.log(err);
+      res.json({success: true, message: "Left review.", review})
+    })
   })
+
+  module.exports = reviewsRouter

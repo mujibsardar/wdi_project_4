@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', usersRoutes)
 app.use('/api/movies', moviesRoutes)
 app.use('/api/tvs', tvsRoutes)
-// app.use('/api/movieReviews', movieReviewsRoutes)
+app.use('/api/movieReviews', movieReviewsRoutes)
 
 
 // listen for incoming http requests:
