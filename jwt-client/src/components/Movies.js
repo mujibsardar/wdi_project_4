@@ -10,7 +10,6 @@ class Movies extends Component {
   ///////////// 11111111 ///////////////////////
 
 
-
   ///////////// 11111111 ///////////////////////
   render() {
     var movies = this.props.movies

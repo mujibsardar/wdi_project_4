@@ -21,9 +21,9 @@ reviewsRouter.route('/')
     })
   })
 
-  reviewsRouter.route('/:movieId')
+  reviewsRouter.route('/:movieID')
       .get((req, res) => {
-        Review.find({}, (err, reviews) => {
+        Review.find({movieID: req.params.movieID}, (err, reviews) => {
           if(err) console.log(err);
           res.json(reviews)
         })

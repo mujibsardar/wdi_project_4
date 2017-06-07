@@ -43,6 +43,11 @@ a:hover {
   color: #7f8c8d;
   text-decoration: underline;
 }
+
+.reviews {
+  font-size:  11px;
+}
+
 .movieDetails {
   overflow: hidden;
   height: 350.625px;
@@ -54,6 +59,7 @@ a:hover {
   overflow: scroll;
   width: 100%;
 }
+
 
 .row__inner {
   -webkit-transition: 450ms -webkit-transform;

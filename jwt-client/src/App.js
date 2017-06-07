@@ -108,23 +108,21 @@ class App extends Component {
 
   ////////////////// 111111111///////////////////////
   _showDetailsMovie(evt) {
+    // Bad way of getting movie id?
     var id = evt.target.parentNode.id
-
     axios ({
         url: '/api/movies/' + id,
         method: 'get'
     }).then(response => {
-        //
-        // axios ({
-        //     url: '/api/movieReviews/' + id,
-        //     method: 'get'
-        // }).then(res => {
+        axios ({
+            url: '/api/movieReviews/' + id,
+            method: 'get'
+        }).then(res => {
             this.setState ({
-              currentMovie: {details: response.data, reviews: null}
+              currentMovie: {details: response.data, reviews: res.data}
             })
         })
-
-    // })
+    })
   }
   ////////////////// 111111111///////////////////////
 
@@ -132,7 +130,6 @@ class App extends Component {
   ////////////////// 111111111///////////////////////
   _showDetailsTV(evt) {
     var id = evt.target.parentNode.id
-
     axios ({
         url: '/api/tvs/' + id,
         method: 'get'
