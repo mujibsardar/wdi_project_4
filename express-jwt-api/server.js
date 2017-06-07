@@ -7,10 +7,9 @@ const
   mongoose = require('mongoose'),
   usersRoutes = require('./routes/users.js'),
   moviesRoutes = require ('./routes/movies.js'),
+  tvsRoutes = require ('./routes/tvs.js'),
+  movieReviewsRoutes = require ('./routes/movieReviews.js'),
   cors = require('cors'),
-  // stylus = require('stylus'),
-  // movieDB = require('moviedb')('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyODRjZDdlMDdmNmY1MTVkMTBkMDEyNTMyNzNiNjBlYyIsInN1YiI6IjU5MzVhNGJmYzNhMzY4NWMwNzAwMGExMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8iWNSSYo1uL-AmflvgdxqxDgSXAIfpFVvbxK51mHmrE'),
-  // movieDB = require('moviedb')(process.env.MOVIEDB_KEY),
   mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/filmview',
   port = process.env.PORT || 3001
 
@@ -37,6 +36,9 @@ app.get('/', (req, res) => {
 // apply all user routes here:
 app.use('/api/users', usersRoutes)
 app.use('/api/movies', moviesRoutes)
+app.use('/api/tvs', tvsRoutes)
+// app.use('/api/movieReviews', movieReviewsRoutes)
+
 
 // listen for incoming http requests:
 app.listen(port, (err) => {

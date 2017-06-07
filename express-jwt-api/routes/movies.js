@@ -1,6 +1,5 @@
 const
   express = require('express'),
-  authorize = require('../config/serverAuth.js').authorize,
   moviesRouter = new express.Router(),
   moviedbKey = process.env.MOVIEDB_KEY,
   movieDB = require('moviedb')(moviedbKey)
@@ -10,19 +9,19 @@ const
 
 moviesRouter.route('/')
   .get((req, response) => {
-    console.log("movieKey", moviedbKey);
     movieDB.discoverMovie({}, (err, res) => {
       response.json(res)
     })
   })
   .post((req, res) => {
-
   })
 
 // Specific movie
 moviesRouter.route('/:id')
   .get((req, response) => {
-
+    movieDB.movieInfo({id: req.params.id}, (err, res) => {
+      response.json(res)
+    })
 })
   .patch((req, res) => {
 
