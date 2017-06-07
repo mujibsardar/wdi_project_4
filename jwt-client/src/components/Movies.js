@@ -19,7 +19,7 @@ class Movies extends Component {
     const htmlMovieArray = movies.map( (m) => {
       posterURL = baseURL + m.poster_path
       return (
-        <div key={m.id} id={m.id} className="tile" onClick={this.props.getReviewsMovie.bind(this) }>
+        <div key={m.id} id={m.id} className="tile" onClick={this.props.showDetailsMovie.bind(this) }>
           <div className="tile__media" >
             <img  className="tile__img" src={posterURL} alt=""   />
           </div>
@@ -31,7 +31,7 @@ class Movies extends Component {
         </div>
       )
     })
-    
+
     return (
       <div className="row">
         <div className="row__inner">

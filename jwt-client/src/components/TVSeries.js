@@ -21,7 +21,7 @@ class TVSeries extends Component {
     const htmlTVArray = tvseries.map( (m) => {
       posterURL = baseURL + m.poster_path
       return (
-        <div key={m.id} id={m.id} className="tile" onClick={this.props.getReviewsTV.bind(this) }>
+        <div key={m.id} id={m.id} className="tile" onClick={this.props.showDetailsTV.bind(this) }>
           <div className="tile__media" >
             <img  className="tile__img" src={posterURL} alt=""   />
           </div>

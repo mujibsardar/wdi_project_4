@@ -15,6 +15,18 @@ reviewsRouter.route('/')
       if(err) console.log(err);
       res.json({success: true, message: "Left review.", review})
     })
+  }).delete((req, res) => {
+    Review.remove({}, (err, reviews) => {
+      res.json({success: true, message: "All reviews deleted.", reviews})
+    })
   })
+
+  reviewsRouter.route('/:movieId')
+      .get((req, res) => {
+        Review.find({}, (err, reviews) => {
+          if(err) console.log(err);
+          res.json(reviews)
+        })
+      })
 
   module.exports = reviewsRouter

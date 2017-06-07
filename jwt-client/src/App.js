@@ -107,23 +107,30 @@ class App extends Component {
 
 
   ////////////////// 111111111///////////////////////
-  _getReviewsMovie(evt) {
+  _showDetailsMovie(evt) {
     var id = evt.target.parentNode.id
 
     axios ({
         url: '/api/movies/' + id,
         method: 'get'
     }).then(response => {
-      this.setState ({
-        currentMovie: response.data
-      })
-    })
+        //
+        // axios ({
+        //     url: '/api/movieReviews/' + id,
+        //     method: 'get'
+        // }).then(res => {
+            this.setState ({
+              currentMovie: {details: response.data, reviews: null}
+            })
+        })
+
+    // })
   }
   ////////////////// 111111111///////////////////////
 
 
   ////////////////// 111111111///////////////////////
-  _getReviewsTV(evt) {
+  _showDetailsTV(evt) {
     var id = evt.target.parentNode.id
 
     axios ({
@@ -163,9 +170,9 @@ class App extends Component {
           login: <LogIn onLogin={this._logIn.bind(this)} />,
           signup: <SignUp onSignup={this._signUp.bind(this)} />,
         }[this.state.view]}
-        <Movies movies={this.state.movies} getReviewsMovie={this._getReviewsMovie.bind(this)}/>
+        <Movies movies={this.state.movies} showDetailsMovie={this._showDetailsMovie.bind(this)}/>
         {this.state.currentMovie && <ReviewsMovie movie={this.state.currentMovie}/>}
-        <TVSeries tvSeries={this.state.tvSeries} getReviewsTV={this._getReviewsTV.bind(this)}/>
+        <TVSeries tvSeries={this.state.tvSeries} showDetailsTV={this._showDetailsTV.bind(this)}/>
         {this.state.currentTV && <ReviewsTV tvSeries={this.state.currentTV}/>}
 
       </div>

@@ -7,7 +7,7 @@ class ReviewsMovie extends Component {
   constructor(){
     super()
     this.state = {
-      canLeaveReview: true
+      canLeaveReview: true,
     }
   }
 
@@ -21,14 +21,16 @@ class ReviewsMovie extends Component {
 
   ///////////// 11111111 ///////////////////////
   _leaveReview(review) {
+    console.log("_leaveReview ENTERED: ", review);
     axios ({
         url: '/api/movieReviews/',
         method: 'post',
         data: review
     }).then(response => {
-      console.log("Success! Added Review!");
-      console.log(response);
-      // set state
+      console.log("_leaveReview SUCCESS: ", response);
+      this.setState = {
+        canLeaveReview: false
+      }
     })
   }
   ///////////// 11111111 ///////////////////////
@@ -40,7 +42,7 @@ class ReviewsMovie extends Component {
     var title = ""
     var overview = ""
 
-    var movie = this.props.movie
+    var movie = this.props.movie.details
     title = movie.title
     overview = movie.overview
 
@@ -49,23 +51,27 @@ class ReviewsMovie extends Component {
         <h2>{title}</h2>
         <h5>{overview}</h5>
 
+
         {{
-          true: <LeaveReview onLeaveReview={this._leaveReview.bind(this)} />,
+          true: <LeaveReview onLeaveReview={this._leaveReview.bind(this)} movie={movie} />,
         }[this.state.canLeaveReview]}
 
       </div>
     )
+    }
   }
   ///////////// 11111111 ///////////////////////
 
-}
+
 
 
 /////////////////////////////////////////////////////////////
 class LeaveReview extends Component {
   _handleLeaveReview(evt) {
+    console.log("props ID test: ", this.props.movie.id);
     evt.preventDefault()
     const review = {
+      movieID: this.props.movie.id,
       plot: this.refs.plot.value,
       originality: this.refs.originality.value,
       acting: this.refs.acting.value,
