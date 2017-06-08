@@ -77,12 +77,11 @@ class ReviewsTV extends Component {
   class Reviews extends Component{
       render(){
         var reviews = this.props.reviews
-        var reviewsHTML = []
 
         var avgPlotScore = 0
         var avgOriginalityScore = 0
         var avgActingScore = 0
-        var avgMessageScore = 0
+        var avgInspirationScore = 0
         var avgRealismScore = 0
         var avgMusicScore = 0
         var avgSpecialEffectsScore = 0
@@ -96,7 +95,7 @@ class ReviewsTV extends Component {
           avgPlotScore += r.plot
           avgOriginalityScore += r.originality
           avgActingScore += r.acting
-          avgMessageScore += r.message
+          avgInspirationScore += r.inspiration
           avgRealismScore += r.realism
           avgMusicScore += r.music
           avgSpecialEffectsScore += r.specialEffects
@@ -106,35 +105,34 @@ class ReviewsTV extends Component {
           avgComments.push(r.comment)
         })
 
-        avgPlotScore /= reviews.length
-        avgOriginalityScore /= reviews.length
-        avgActingScore /= reviews.length
-        avgMessageScore /= reviews.length
-        avgRealismScore /= reviews.length
-        avgMusicScore /= reviews.length
-        avgSpecialEffectsScore /= reviews.length
-        avgDirectingScore /= reviews.length
-        avgHumorScore /= reviews.length
-        avgKidsFriendlyScore /= reviews.length
+        if(reviews.length > 0){
+          avgPlotScore /= reviews.length
+          avgOriginalityScore /= reviews.length
+          avgActingScore /= reviews.length
+          avgInspirationScore /= reviews.length
+          avgRealismScore /= reviews.length
+          avgMusicScore /= reviews.length
+          avgSpecialEffectsScore /= reviews.length
+          avgDirectingScore /= reviews.length
+          avgHumorScore /= reviews.length
+          avgKidsFriendlyScore /= reviews.length
+        }
 
-        reviewsHTML.push(
-          <li>Average Plot Score: {avgPlotScore}</li>
-        )
 
         return (
           <div className="reviews">
-            <h2>Reviews</h2>
+            <h3>Rating Scores</h3>
             <ul>
-              <li> Plot Score: {avgPlotScore}%</li>
-              <li> Originality Score: {avgOriginalityScore}%</li>
-              <li> Acting Score: {avgActingScore}%</li>
-              <li> Message Score: {avgMessageScore}%</li>
-              <li> Realism Score: {avgRealismScore}%</li>
-              <li> Music Score: {avgMusicScore}%</li>
-              <li> Special Effects Score: {avgSpecialEffectsScore}%</li>
-              <li> Directing Score: {avgDirectingScore}%</li>
-              <li> Humor Score: {avgHumorScore}%</li>
-              <li> Kids Friendly Score: {avgKidsFriendlyScore}%</li>
+              <li> Plot Score: <span className="scores"> {avgPlotScore}%</span></li>
+              <li> Originality Score: <span className="scores"> {avgOriginalityScore}%</span></li>
+              <li> Acting Score: <span className="scores"> {avgActingScore}%</span></li>
+              <li> Inspiration Score: <span className="scores"> {avgInspirationScore}%</span></li>
+              <li> Realism Score: <span className="scores"> {avgRealismScore}%</span></li>
+              <li> Music Score: <span className="scores"> {avgMusicScore}%</span></li>
+              <li> Special Effects Score: <span className="scores"> {avgSpecialEffectsScore}%</span></li>
+              <li> Directing Score: <span className="scores"> {avgDirectingScore}%</span></li>
+              <li> Humor Score: <span className="scores"> {avgHumorScore}%</span></li>
+              <li> Kids Friendly Score: <span className="scores"> {avgKidsFriendlyScore}%</span></li>
             </ul>
           </div>)
       }
@@ -153,7 +151,7 @@ class ReviewsTV extends Component {
       plot: this.refs.plot.value,
       originality: this.refs.originality.value,
       acting: this.refs.acting.value,
-      message: this.refs.message.value,
+      inspiration: this.refs.inspiration.value,
       realism: this.refs.realism.value,
       music: this.refs.music.value,
       specialEffects: this.refs.specialEffects.value,
@@ -168,19 +166,19 @@ class ReviewsTV extends Component {
   render() {
     return (
       <div className='leaveReview'>
-        <h2>Leave Review</h2>
+        <h3>Leave Rating Scores</h3>
         <form onSubmit={this._handleLeaveReview.bind(this)}>
-          <input type='number' placeholder='plot (0-100)' ref='plot' />
-          <input type='number' placeholder='originality (0-100)' ref='originality' />
-          <input type='number' placeholder='acting (0-100)' ref='acting' />
-          <input type='number' placeholder='message (0-100)' ref='message' />
-          <input type='number' placeholder='realism (0-100)' ref='realism' />
-          <input type='number' placeholder='music (0-100)' ref='music' />
-          <input type='number' placeholder='specialEffects (0-100)' ref='specialEffects' />
-          <input type='number' placeholder='directing (0-100)' ref='directing' />
-          <input type='number' placeholder='humor (0-100)' ref='humor' />
-          <input type='number' placeholder='kidsFriendly (0-100)' ref='kidsFriendly' />
-          <input type='text' placeholder='comment' ref='comment' />
+          <input type='number' placeholder='Plot (0-100)' ref='plot' />
+          <input type='number' placeholder='Originality (0-100)' ref='originality' />
+          <input type='number' placeholder='Acting (0-100)' ref='acting' />
+          <input type='number' placeholder='Inspiration (0-100)' ref='inspiration' />
+          <input type='number' placeholder='Realism (0-100)' ref='realism' />
+          <input type='number' placeholder='Music (0-100)' ref='music' />
+          <input type='number' placeholder='Special Effects (0-100)' ref='specialEffects' />
+          <input type='number' placeholder='Directing (0-100)' ref='directing' />
+          <input type='number' placeholder='Humor (0-100)' ref='humor' />
+          <input type='number' placeholder='Kids Friendly (0-100)' ref='kidsFriendly' />
+          <input type='text' placeholder='Comment (text)' ref='comment' />
 
           <button type='submit'>Leave Review</button>
         </form>

@@ -7,7 +7,7 @@ const
     plot: Number,
     originality: Number,
     acting: Number,
-    message: Number,
+    inspiration: Number,
     realism: Number,
     music: Number,
     specialEffects: Number,
