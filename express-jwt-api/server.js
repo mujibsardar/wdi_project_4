@@ -9,6 +9,7 @@ const
   moviesRoutes = require ('./routes/movies.js'),
   tvsRoutes = require ('./routes/tvs.js'),
   movieReviewsRoutes = require ('./routes/movieReviews.js'),
+  tvReviewsRoutes = require ('./routes/tvReviews.js'),
   cors = require('cors'),
   mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/filmview',
   port = process.env.PORT || 3001
@@ -38,6 +39,7 @@ app.use('/api/users', usersRoutes)
 app.use('/api/movies', moviesRoutes)
 app.use('/api/tvs', tvsRoutes)
 app.use('/api/movieReviews', movieReviewsRoutes)
+app.use('/api/tvReviews', tvReviewsRoutes)
 
 
 // listen for incoming http requests:

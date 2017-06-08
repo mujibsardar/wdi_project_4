@@ -20,7 +20,8 @@ class App extends Component {
       tvSeries: [],
       currentMovie: null,
       currentTV: null,
-      showLeaveReviewBox: true
+      showLeaveReviewBox: true,
+      thankYouMessage: false
     }
   }
 
@@ -128,13 +129,15 @@ class App extends Component {
             }).then(r => {
               this.setState ({
                 currentMovie: {details: response.data, reviews: res.data},
-                showLeaveReviewBox: !r.data
+                showLeaveReviewBox: !r.data,
+                thankYouMessage: false
               })
             })
         } else {
           this.setState ({
             currentMovie: {details: response.data, reviews: res.data},
-            showLeaveReviewBox: false
+            showLeaveReviewBox: false,
+            thankYouMessage: false
           })
         }
 
@@ -148,15 +151,37 @@ class App extends Component {
 
   ////////////////// 111111111///////////////////////
   _showDetailsTV(evt) {
-    var id = evt.target.parentNode.id
+    // Bad way of getting movie id?
+    var tvID = evt.target.parentNode.id
+    const currentUser = clientAuth.getCurrentUser()
     axios ({
-        url: '/api/tvs/' + id,
+        url: '/api/tvs/' + tvID,
         method: 'get'
     }).then(response => {
-      this.setState ({
-        currentTV: response.data
-      })
+        axios ({
+            url: '/api/tvReviews/' + tvID,
+            method: 'get'
+        }).then(res => {
+          if(currentUser){
+            axios ({
+              url: '/api/tvReviews/tvAndUser/' + tvID + '/' + currentUser._id,
+              method: 'get'
+            }).then(r => {
+              this.setState ({
+                currentTV: {details: response.data, reviews: res.data},
+                showLeaveReviewBox: !r.data,
+                thankYouMessage: false
+              })
+            })
+        } else {
+          this.setState ({
+            currentTV: {details: response.data, reviews: res.data},
+            showLeaveReviewBox: false,
+            thankYouMessage: false
+          })
+        }
     })
+  })
   }
   ////////////////// 111111111///////////////////////
 
@@ -166,6 +191,14 @@ class App extends Component {
     this.setState ({
       currentMovie: null,
       currentTV: null
+    })
+  }
+  ////////////////// 111111111///////////////////////
+
+  ////////////////// 111111111///////////////////////
+  _leftReview(evt){
+    this.setState ({
+      thankYouMessage: true
     })
   }
   ////////////////// 111111111///////////////////////
@@ -198,9 +231,9 @@ class App extends Component {
           signup: <SignUp onSignup={this._signUp.bind(this)} />,
         }[this.state.view]}
         <Movies movies={this.state.movies} showDetailsMovie={this._showDetailsMovie.bind(this)}/>
-        {this.state.currentMovie && <ReviewsMovie movie={this.state.currentMovie} user={currentUser} showLeaveReviewBox={this.state.showLeaveReviewBox} onClose={this._closeDetails.bind(this)}/>}
+        {this.state.currentMovie && <ReviewsMovie movie={this.state.currentMovie} user={currentUser} showLeaveReviewBox={this.state.showLeaveReviewBox} thankYouMessage={this.state.thankYouMessage} onClose={this._closeDetails.bind(this)} leftReview={this._leftReview.bind(this)}/>}
         <TVSeries tvSeries={this.state.tvSeries} showDetailsTV={this._showDetailsTV.bind(this)}/>
-        {this.state.currentTV && <ReviewsTV tvSeries={this.state.currentTV} user={currentUser} showLeaveReviewBox={this.state.showLeaveReviewBox} onClose={this._closeDetails.bind(this)}/>}
+        {this.state.currentTV && <ReviewsTV tv={this.state.currentTV} user={currentUser} showLeaveReviewBox={this.state.showLeaveReviewBox} thankYouMessage={this.state.thankYouMessage} onClose={this._closeDetails.bind(this)} leftReview={this._leftReview.bind(this)} />}
       </div>
     );
   }
