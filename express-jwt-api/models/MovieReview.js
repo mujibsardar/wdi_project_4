@@ -2,6 +2,7 @@ const
   mongoose = require('mongoose'),
 
   movieReviewSchema = new mongoose.Schema({
+    userID: String,
     movieID: Number,
     plot: Number,
     originality: Number,

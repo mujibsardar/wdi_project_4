@@ -2,6 +2,16 @@ import React, {Component} from 'react'
 
 class ReviewsTV extends Component {
 
+
+  constructor(){
+    super()
+    this.state = {
+      canLeaveReview: true,
+      thankYouMessage: false
+    }
+  }
+
+  
   ///////////// 11111111 ///////////////////////
   componentDidMount() {
 

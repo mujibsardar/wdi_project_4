@@ -35,16 +35,17 @@ class App extends Component {
           url: '/api/tvs',
           method: 'get'
       }).then(res => {
-            var tvDiscovery = res.data.results
-            var discoverMovies = response.data.results
 
-            this.setState ({
-              movies: discoverMovies,
-              tvSeries: tvDiscovery,
-              currentUser: currentUser,
-              loggedIn: !!currentUser,
-              view: ''
-            })
+        var tvDiscovery = res.data.results
+        var discoverMovies = response.data.results
+
+        this.setState ({
+          movies: discoverMovies,
+          tvSeries: tvDiscovery,
+          currentUser: currentUser,
+          loggedIn: !!currentUser,
+          view: ''
+        })
       })
     })
   }
@@ -108,22 +109,41 @@ class App extends Component {
   ////////////////// 111111111///////////////////////
   _showDetailsMovie(evt) {
     // Bad way of getting movie id?
-    var id = evt.target.parentNode.id
+    var movieID = evt.target.parentNode.id
+    const currentUser = clientAuth.getCurrentUser()
     axios ({
-        url: '/api/movies/' + id,
+        url: '/api/movies/' + movieID,
         method: 'get'
     }).then(response => {
         axios ({
-            url: '/api/movieReviews/' + id,
+            url: '/api/movieReviews/' + movieID,
             method: 'get'
         }).then(res => {
-            this.setState ({
-              currentMovie: {details: response.data, reviews: res.data}
+
+
+          if(currentUser){
+            axios ({
+              url: '/api/movieReviews/movieAndUser/' + movieID + '/' + currentUser._id,
+              method: 'get'
+            }).then(r => {
+              this.setState ({
+                currentMovie: {details: response.data, reviews: res.data},
+                showLeaveReviewBox: !r.data
+              })
             })
-        })
+        } else {
+          this.setState ({
+            currentMovie: {details: response.data, reviews: res.data},
+            showLeaveReviewBox: false
+          })
+        }
+
     })
-  }
+  })
+}
+
   ////////////////// 111111111///////////////////////
+
 
 
   ////////////////// 111111111///////////////////////
@@ -153,6 +173,7 @@ class App extends Component {
 
   ////////////////// 111111111///////////////////////
   render() {
+    var currentUser = this.state.currentUser
     return (
       <div className="container">
 
@@ -177,10 +198,9 @@ class App extends Component {
           signup: <SignUp onSignup={this._signUp.bind(this)} />,
         }[this.state.view]}
         <Movies movies={this.state.movies} showDetailsMovie={this._showDetailsMovie.bind(this)}/>
-        {this.state.currentMovie && <ReviewsMovie movie={this.state.currentMovie} showLeaveReviewBox={this.state.showLeaveReviewBox} onClose={this._closeDetails.bind(this)}/>}
+        {this.state.currentMovie && <ReviewsMovie movie={this.state.currentMovie} user={currentUser} showLeaveReviewBox={this.state.showLeaveReviewBox} onClose={this._closeDetails.bind(this)}/>}
         <TVSeries tvSeries={this.state.tvSeries} showDetailsTV={this._showDetailsTV.bind(this)}/>
-        {this.state.currentTV && <ReviewsTV tvSeries={this.state.currentTV}/>}
-
+        {this.state.currentTV && <ReviewsTV tvSeries={this.state.currentTV} user={currentUser} showLeaveReviewBox={this.state.showLeaveReviewBox} onClose={this._closeDetails.bind(this)}/>}
       </div>
     );
   }
@@ -245,8 +265,6 @@ class LogIn extends Component {
   }
 }
 /////////////////////////////////////////////////////////////
-
-
 
 
 

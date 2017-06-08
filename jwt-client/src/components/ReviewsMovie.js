@@ -8,12 +8,14 @@ class ReviewsMovie extends Component {
   constructor(){
     super()
     this.state = {
-      canLeaveReview: null
+      canLeaveReview: true,
+      thankYouMessage: false
     }
   }
 
   ///////////// 11111111 ///////////////////////
   componentDidMount() {
+
   }
   ///////////// 11111111 ///////////////////////
 
@@ -32,11 +34,13 @@ class ReviewsMovie extends Component {
         method: 'post',
         data: review
     }).then(response => {
-      this.setState = {
-        canLeaveReview: false
-      }
-    })
-  }
+      console.log(response);
+      this.setState({
+        canLeaveReview: false,
+        thankYouMessage: true
+      })
+  })
+}
   ///////////// 11111111 ///////////////////////
 
 
@@ -50,11 +54,13 @@ class ReviewsMovie extends Component {
 
   ///////////// 11111111 ///////////////////////
   render() {
+    console.log(this.state.canLeaveReview);
     var movie = this.props.movie.details
     var title = movie.title
     var overview = movie.overview
     var reviews = this.props.movie.reviews
     var showLeaveReviewBox = this.props.showLeaveReviewBox
+    var user = this.props.user
 
     return (
       <div className="movieDetails">
@@ -64,7 +70,8 @@ class ReviewsMovie extends Component {
           <h5>{overview}</h5>
         </div>
         <Reviews reviews={reviews} />
-        {showLeaveReviewBox && <LeaveReview onLeaveReview={this._leaveReview.bind(this)} movie={movie} />}
+        {this.state.canLeaveReview && showLeaveReviewBox && <LeaveReview onLeaveReview={this._leaveReview.bind(this)} movie={movie} user={user}/>}
+        {this.state.thankYouMessage  && <h3>Thank you for your feedback!</h3>}
 
         {/* {{
           true: <LeaveReview onLeaveReview={this._leaveReview.bind(this)} movie={movie} />,
@@ -153,7 +160,9 @@ class ReviewsMovie extends Component {
 class LeaveReview extends Component {
   _handleLeaveReview(evt) {
     evt.preventDefault()
+
     const review = {
+      userID: this.props.user._id,
       movieID: this.props.movie.id,
       plot: this.refs.plot.value,
       originality: this.refs.originality.value,
