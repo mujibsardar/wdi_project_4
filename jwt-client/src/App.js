@@ -207,24 +207,30 @@ class App extends Component {
   ////////////////// 111111111///////////////////////
   render() {
     var currentUser = this.state.currentUser
+    var name = ""
+    if(currentUser){
+      name = (currentUser.name).charAt(0).toUpperCase() + (currentUser.name).slice(1)
+    }
+
     return (
       <div className="container">
 
         <div className="App-header">
-          <h2>{this.state.loggedIn ? this.state.currentUser.name : 'Not Logged In'}</h2>
+          {this.state.loggedIn ? 'Welcome ' + name  : 'Please login to start rating'}
         </div>
 
           {!this.state.loggedIn && (
-            <button name='signup' onClick={this._setView.bind(this)}>Sign Up</button>
+            <button className="sessionButton signupButton" name='signup' onClick={this._setView.bind(this)}>Sign Up</button>
           )}
 
           {!this.state.loggedIn && (
-            <button name='login' onClick={this._setView.bind(this)}>Log In</button>
+            <button className="sessionButton loginButton" name='login' onClick={this._setView.bind(this)}>Log In</button>
           )}
 
           {this.state.loggedIn && (
-            <button onClick={this._logOut.bind(this)}>Log Out</button>
+            <button className="sessionButton logoutButton" onClick={this._logOut.bind(this)}>Log Out</button>
           )}
+
         {{
           home: <h2>Home View</h2>,
           login: <LogIn onLogin={this._logIn.bind(this)} />,
@@ -256,9 +262,9 @@ class SignUp extends Component {
 
   render() {
     return (
-      <div className='container'>
-        <h2>Sign Up</h2>
-        <form onSubmit={this._handleSignup.bind(this)}>
+      <div className='formContainer signUpContainer'>
+        Sign Up
+        <form className="form signUpForm" onSubmit={this._handleSignup.bind(this)}>
           <input type='text' placeholder='Name' ref='name' />
           <input type='text' placeholder='Email' ref='email' />
           <input type='password' placeholder='Password' ref='password' />
@@ -286,9 +292,9 @@ class LogIn extends Component {
 
   render() {
     return (
-      <div className='container'>
-        <h2>Log In</h2>
-        <form onSubmit={this._handleLogin.bind(this)}>
+      <div className='formContainer loginContainer'>
+         Log In
+        <form className="form loginForm" onSubmit={this._handleLogin.bind(this)}>
           <input type='text' placeholder='Email' ref='email' />
           <input type='password' placeholder='Password' ref='password' />
           <button type='submit'>Log In</button>

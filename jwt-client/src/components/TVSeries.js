@@ -27,7 +27,7 @@ class TVSeries extends Component {
           </div>
           <div className="tile__details">
             <div className="tile__title">
-              {m.title}
+              {m.name}
             </div>
           </div>
         </div>
