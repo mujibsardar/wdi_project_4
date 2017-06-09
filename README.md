@@ -2,7 +2,7 @@
 
 ## Overview
 
-flick peek is a movie and tv series rating app (I know, crazy!). It facilitates a more holistic approach to movie and tv series rating. User can click on a movie or TV series object which are displayed when the app is loaded and then view and rate (if eligible) the item. Currently the app lists a list of popular movies along with a list of popular TV series. Any future versions would include a search feature to allow searching for particular titles.
+flick peek is a movie and tv series rating app (I know, crazy!). The only catch is that the the application facilitates a more holistic approach to movie and tv series rating. User can click on a movie or TV series object which are displayed when the app is loaded and then view and rate (if eligible) the item. Currently the app lists a list of popular movies along with a list of popular TV series. Any future versions would include a search feature to allow searching for particular titles.
 
 ## Preview
 ![](images/image1.png)
@@ -53,6 +53,14 @@ Working with react was a challenge. I feel like it requires a slightly different
 ## Wireframe
 
 ![](images/image3.jpg)
+
+## Credits
+
+I would like to thank Josh Pen who wrote "Pure-CSS Netflix Show Carousel" posted on codepen. It was exactly what I was looking for to reach my UI goal. 
+
+https://codepen.io/joshhunt/pen/LVQZRa
+
+
 
         
    
