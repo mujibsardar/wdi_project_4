@@ -16,7 +16,11 @@ const
 
 // connect to mongodb:
 mongoose.connect(mongoUrl, (err) => {
-  console.log(err || 'Connected to MongoDB.')
+  console.log("Trying to connect to ", mongoUrl);
+  if(err) console.log(err);
+  else {
+    console.log('Connected to MongoDB.')
+  }
 })
 
 // log all incoming requests to the console:
