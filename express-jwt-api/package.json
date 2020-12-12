@@ -18,6 +18,8 @@
     "jsonwebtoken": "^7.4.1",
     "mongoose": "^5.10.0",
     "morgan": "^1.8.2",
-    "moviedb": "^0.2.8"
+    "moviedb": "^0.2.8",
+    "hoek": ">=4.2.1",
+    "superagent": ">=3.7.0"
   }
 }
