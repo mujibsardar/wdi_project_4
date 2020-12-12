@@ -15,7 +15,7 @@ const
   port = process.env.PORT || 3001
 
 // connect to mongodb:
-mongoose.connect(mongoUrl, (err) => {
+mongoose.connect(mongoUrl.toString(), (err) => {
   console.log("Trying to connect to ", mongoUrl);
   if(err) console.log(err);
   else {
