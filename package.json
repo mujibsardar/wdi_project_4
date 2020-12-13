@@ -1,0 +1,26 @@
+{
+  "name": "flickpeek",
+  "version": "1.0.0",
+  "description": "Discover your next flick along with holistic user critic reviews and ratings. ",
+  "main": "express-jwt-api/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \" npm run start-server \" \" npm run start-client \" ",
+    "start-server": "cd express-jwt-api && npm start",
+    "start-client": "cd jwt-client && npm start",
+    "heroku-postbuild": "cd jwt-client && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mujibsardar/wdi_project_4.git"
+  },
+  "author": "Avan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mujibsardar/wdi_project_4/issues"
+  },
+  "homepage": "https://github.com/mujibsardar/wdi_project_4#readme",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
