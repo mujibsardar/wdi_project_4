@@ -10,7 +10,8 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "superagent": ">=3.7.0",
-    "webpack-dev-server": ">=3.1.11"
+    "webpack-dev-server": ">=3.1.11",
+    "merge": ">=2.1.1"
   },
   "devDependencies": {
     "react-scripts": "^4.0.1"
