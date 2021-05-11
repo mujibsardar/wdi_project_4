@@ -6,12 +6,12 @@
     "axios": ">=0.18.1",
     "handlebars": ">=4.7.7",
     "jwt-decode": "^2.2.0",
+    "merge": ">=2.1.1",
     "moviedb": "^0.2.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "superagent": ">=3.7.0",
-    "webpack-dev-server": ">=3.1.11",
-    "merge": ">=2.1.1"
+    "webpack-dev-server": ">=3.1.11"
   },
   "devDependencies": {
     "react-scripts": "^4.0.1"
