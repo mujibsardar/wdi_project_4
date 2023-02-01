@@ -16,7 +16,7 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.1",
-    "mongoose": "^5.10.0",
+    "mongoose": "^5.13.15",
     "morgan": "^1.8.2",
     "moviedb": "^0.2.8",
     "hoek": ">=4.2.1",
